@@ -1,0 +1,58 @@
+<%- include('../partials/adminheader.ejs') %>
+<%- include('../partials/adminnav.ejs') %>
+
+ <!-- Page content -->
+ <div class="main">
+     <div class="container mt-5">
+         <form action="/admin/addProduct" >
+            <div class="float-right mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">Add Products</button>
+            </div>
+        </form>
+        
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let i = 0;i < menus.length; i++) { %>
+              <tr>
+                <th scope="row"><%= [i+1] %></th>
+                <td><img class="img-fluid rounded" style="width: 70px;" src="/img/<%= menus[i].image %>" alt=""></td>
+                <td><%= menus[i].name %></td>
+                <td><%= menus[i].price %></td>
+                <td>
+                  <form action="/admin/editProduct" method="POST">
+                    <input type="hidden" name="id" value="<%= menus[i]._id %>">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                  </form>
+                </td>
+                <td>
+                  <form action="/admin/deleteProduct" method="POST">
+                    <input type="hidden" name="id" value="<%= menus[i]._id %>">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+
+         
+     </div>
+
+    
+  </div> 
+
+
+
+  
+
+<%- include('../partials/adminfooter.ejs') %>

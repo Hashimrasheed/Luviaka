@@ -1,0 +1,124 @@
+<%- include('partials/header.ejs') %>
+
+<%- include('partials/nav.ejs') %>
+
+
+
+<!-- Hero Section Begin -->
+<section class="hero" style="margin-top: 2rem;">
+  <div class="container">
+      <div class="row">
+          
+          <div class="col-lg-9">
+              
+              <div class="hero__item set-bg" style="background-image: url('/img/hero/homebanner.jpg')">
+                <div ></div>
+                  <div class="hero__text">
+                      <span>FRUIT FRESH</span>
+                      <h2>Vegetable <br />100% Organic</h2>
+                      <p>Free Pickup and Delivery Available</p>
+                      <form action="#products">
+                        <button type="submit" class=" btn-dark my-4">
+                          <span class="primary-btn ">SHOP NOW</span>
+                        </button>
+                      </form>
+                      
+                  </div>
+              </div>
+              
+          </div>
+          <div class="col-lg-3">
+           
+            <div class="hero__categories">
+                <div class="hero__categories__all">
+                    <i class="fa fa-bars"></i>
+                    <span>All departments</span>
+                </div>
+                <ul>
+                    <li><a href="#">Fresh Meat</a></li>
+                    <li><a href="#">Vegetables</a></li>
+                    <li><a href="#">Fruit & Nut Gifts</a></li>
+                    <li><a href="#">Fresh Berries</a></li>
+                    <li><a href="#">Fresh Bananas</a></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+  </div>
+</section>
+<!-- Hero Section End -->
+
+
+   
+
+
+<!-- <section class="hero py-1">
+  <div class="container mx-auto flex items-center justify-between">
+      
+      <div class="w-1/5">
+          <img src="/img/luviaka.png" alt="image">
+      </div>
+      <div class="w-1/2">
+         
+      </div>
+  </div>
+</section> -->
+
+ 
+
+
+<!-- cards -->
+<section id="products">
+  <div class="container-fluid">
+        <div class="row">
+          <% items.forEach(function(item) { %>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+              <div class="tile">
+                  <div class="wrapper">
+                    <form action="/product">
+                      <div class="banner-img h-40 flex items-center justify-around">
+                        <a href="/products/<%= item._id %>"><img style="margin: auto;" src="/img/<%= item.image %>" alt="Image"></a>
+                        
+                        
+                      </div>
+                    </form>
+                     
+
+                      <div class="header" ><%= item.name %></div>
+                      
+                      <div class="footer flex items-center justify-around mt-6">
+                        <span class="font-bold text-lg">₹<%= item.price %></span>
+                          <button data-item="<%= JSON.stringify(item) %>" class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                            <span>+</span>
+                            <span class="ml-4">Add</span>
+                        </button>
+                      </div>
+
+                  </div>
+              </div> 
+            </div>
+            <!-- popup window -->
+            
+          <% }) %>
+            
+        </div>
+    </div>
+</section>
+
+<!-- popups -->
+
+<!-- contact div -->
+<div class="hero__search">
+                  
+  <div class="hero__search__phone">
+      <div class="hero__search__phone__icon">
+          <i class="fa fa-phone"></i>
+      </div>
+      <div class="hero__search__phone__text">
+          <h5>+91 83019-41618</h5>
+          <span>support 24/7 time</span>
+      </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

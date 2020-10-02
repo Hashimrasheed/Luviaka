@@ -1,0 +1,93 @@
+<%- include('partials/productHeader.ejs') %>
+
+
+
+<section>
+    <div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						
+						<div class="preview-pic tab-content">
+								
+								<div class="tab-pane active" id="pic-1">
+									<div id="img-container">
+										<div id="lens"></div>
+										<img id="featured" src="/img/<%= item.image %>" />
+									</div>
+									
+								</div>
+						  
+						  <div class="tab-pane" id="pic-2"><img src="/img/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-3"><img src="/img/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-4"><img src="/img/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-5"><img src="/img/<%= item.image %>" /></div>
+						</div>
+						<ul class="preview-thumbnail nav nav-tabs">
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
+						  <li><a data-target="#pic-2" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
+						  <li><a data-target="#pic-3" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
+						  <li><a data-target="#pic-4" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
+						  <li><a data-target="#pic-5" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
+						</ul>
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title"><%= item.name %></h3>
+						<div class="rating">
+							<div class="stars">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<span class="review-no">41 reviews</span>
+						</div>
+						<p class="product-description"><%= item.discripsion %></p>
+						
+						<h4 class="price mt-3">current price: <span>₹<%= item.price %></span></h4>
+						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+						
+						
+						<div class="py-5">
+							<span>Artist: <%= item.artist %></span>
+						</div>
+						<div class="flex ">
+							<button data-item="<%= JSON.stringify(item) %>" style="width: min-content;" class="add-to-cart text-white py-1 px-6 rounded-full flex items-center font-bold">
+								<span>+</span>
+								<span class="ml-4">Add</span>
+							</button>
+							<form action="/cart" class="ml-5">
+								<button type="submit" style="width: min-content;" class="add-to-cart py-1 px-6 rounded-full text-white flex items-center font-bold">
+									<span>Buy</span>
+									<span>Now</span>
+									 
+								</button>
+							</form>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<h1>dflk</h1>
+</footer>
+
+<script>
+          JavaScript
+
+// Material Select Initialization
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});
+</script>
+
+
+<%- include('partials/footer.ejs') %>

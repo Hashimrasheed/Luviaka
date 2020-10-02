@@ -1,0 +1,58 @@
+<%- include('../partials/adminheader.ejs') %>
+<%- include('../partials/adminnav.ejs') %>
+
+ <!-- Page content -->
+ <div class="main">
+     <div class="container mt-5">
+         <form action="/admin/addCategory" >
+            <div class="float-right mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">Add Category</button>
+            </div>
+        </form>
+        
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">category</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0;i < category.length; i++) { %>
+              
+              <tr>
+                <th scope="row"><%= [i+1] %></th>
+               
+                <td><%= category[i].category %></td>
+                <td>
+                  <form action="/admin/editCategory" >
+                    <button>
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                   </form>
+                </td>
+                <td>
+                  <form action="/admin/deleteCategory" method="POST"  class="pl-4">
+                    <input type="hidden" value="<%= category[i]._id %>" name="id">
+                    <button type="submit" style="border: none;" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </form>
+                </td>
+                
+              </tr>
+              <% } %>
+
+            </tbody>
+          </table>         
+     </div>
+
+    
+  </div> 
+
+
+
+  
+
+<%- include('../partials/adminfooter.ejs') %>

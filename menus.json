@@ -1,0 +1,29 @@
+[{
+    "_id": {
+      "$oid": "5eee651f739f8c674fd736ee"
+    },
+    "name": "Denim Bag For Women (Black)",
+    "image": "bag1.png",
+    "price": "350"
+  },{
+    "_id": {
+      "$oid": "5eee6671a27a66807cf2bea3"
+    },
+    "name": "polka dot plant (outdoor plants)",
+    "image": "plant1.png",
+    "price": "250"
+  },{
+    "_id": {
+      "$oid": "5eee6692a27a66807cf2bea4"
+    },
+    "name": "Travel bag (blue jeans)",
+    "image": "bag2.png",
+    "price": "300"
+  },{
+    "_id": {
+      "$oid": "5eee66a5a27a66807cf2bea5"
+    },
+    "name": "Bottle art flower vase",
+    "image": "bottle1.png",
+    "price": "200"
+  }]

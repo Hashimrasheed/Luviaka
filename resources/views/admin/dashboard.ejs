@@ -1,0 +1,38 @@
+
+<%- include('../partials/adminheader.ejs') %>
+<%- include('../partials/adminnav.ejs') %>
+
+<div class="main">
+    <h1 class="m-5">Welcome Admin</h1>
+    <section>
+        <div class="row mt-5">
+            <div class="card text-white bg-dark mb-3 ml-4" style="min-width: 17rem; align-items: center;">
+                <div class="card-header">Total Orders</div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= orders %></h5>
+                </div>
+              </div>
+              <div class="card text-white bg-dark mb-3" style="min-width: 17rem; align-items: center;">
+                <div class="card-header">Pending Orders</div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= pending %></h5>
+                </div>
+              </div>
+              <div class="card text-white bg-dark mb-3" style="min-width: 17rem; align-items: center;">
+                <div class="card-header">Earnings</div>
+                <div class="card-body">
+                  <h5 class="card-title">240987</h5>
+                </div>
+              </div>
+              <div class="card text-white bg-dark mb-3" style="min-width: 17rem; align-items: center;">
+                <div class="card-header">Earnings last week</div>
+                <div class="card-body">
+                  <h5 class="card-title">240987</h5>
+                </div>
+              </div>
+        </div>
+    </section>
+</div>
+
+
+<%- include('../partials/adminfooter.ejs') %>

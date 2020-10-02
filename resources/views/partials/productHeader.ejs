@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuviAka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,100;1,300;1,400&display=swap" rel="stylesheet"> 
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- line awsome cdn     -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" />  
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="logo">
+            <img src="/img/logo.png" alt="logo">
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Menu<span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="/customer/orders">My Orders<span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Category
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  <a class="dropdown-item" href="#">Bags</a>
+     
+            </li>
+            
+            <% if(user) { %>
+              <li class="nav-item active">
+                <form id="logout" action="/logout" method="POST" class="nav-item active">
+                  <a class="nav-link" onclick="document.getElementById('logout').submit()" href="#">Logout<span class="sr-only">(current)</span></a>
+                </form>
+            </li>
+
+            <% } else { %>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="/login">Sign In<span class="sr-only">(current)</span></a>
+            </li>
+            <% } %>
+          </ul>
+          
+        </div>
+        <div class="cart ml-auto ">
+            <ul class=" flex items-center my-auto">
+                <li>
+                  <a href="/cart" class="inline-block px-4 py-2 rounded-full flex items-center">
+                    <span id="cartCounter" class="text-white font-bold pr-2"><%= session.cart ? session.cart.totalQty: '' %></span>
+                    <img src="/img/cart.png" alt="cart">
+                  </a>
+                </li>
+            </ul>
+        </div>
+    </nav>

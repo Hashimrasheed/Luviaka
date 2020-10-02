@@ -1,0 +1,436 @@
+@import './variables';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
+@import "./home.scss";
+
+body {
+    font-family: "Lato", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: $dark;
+
+}
+
+nav div.logo {
+    float: left;
+    width: 4rem;
+}
+
+nav .cart a {
+    background: $primary;
+    &:hover {
+        background: $primary-hover;
+    }
+}
+
+.cart {
+    float: right;
+}
+
+nav li a {
+    transition: $smooth;
+    &:hover {
+        color: $primary;
+    }
+}
+// section.hero {
+//     background: rgba(66, 62, 62, 0.301);
+// }
+.size {
+    background: $secondary;
+}
+.add-to-cart {
+    border: 2px solid $primary;
+    color: $primary;
+    transition: $smooth;
+    &:hover {
+        background: $primary;
+        border-color: $pure;
+        color: $pure;
+	}
+	&:focus{
+		outline: none;
+	}
+}
+
+.btns-primary {
+  background: $primary;
+  transition: $smooth;
+  &:hover {
+    background: $primary-hover;
+  }
+}
+
+section.cartpage {
+  background: #ffffff;
+  .amount {
+    color: $primary;
+  }
+}
+
+section.login {
+  a {
+    color: $primary;
+    &:hover {
+      color: $primary-hover;
+    }
+  }
+}
+
+section.register {
+  a {
+    color: $primary;
+    &:hover {
+      color: $primary-hover;
+    }
+  }
+}
+
+/*	Reset & General
+---------------------------------------------------------------------- */
+* { margin: 0px; padding: 0px; }
+body {
+	background: #ecf1f5;
+	font:14px "Open Sans", sans-serif; 
+	text-align:center;
+}
+
+.tile{
+	width: 100%;
+	background:#fff;
+	border-radius:5px;
+	box-shadow:0px 2px 3px -1px rgba(151, 171, 187, 0.7);
+	float:left;
+  	transform-style: preserve-3d;
+  	margin: 10px 5px;
+
+}
+
+.header{
+	border-bottom:1px solid #ebeff2;
+	padding:19px 0;
+	text-align:center;
+	color:#59687f;
+	font-size:600;
+	font-size:19px;	
+	position:relative;
+}
+
+.banner-img {
+	padding: 5px 5px 0;
+}
+
+.banner-img img {
+	width: 50%;
+	border-radius: 5px;
+}
+
+.dates{
+	border:1px solid #ebeff2;
+	border-radius:5px;
+	padding:20px 0px;
+	margin:10px 20px;
+	font-size:16px;
+	color:#5aadef;
+	font-weight:600;	
+	overflow:auto;
+}
+.dates div{
+	float:left;
+	width:50%;
+	text-align:center;
+	position:relative;
+}
+.dates strong,
+.stats strong{
+	display:block;
+	color:#adb8c2;
+	font-size:11px;
+	font-weight:700;
+}
+.dates span{
+	width:1px;
+	height:40px;
+	position:absolute;
+	right:0;
+	top:0;	
+	background:#ebeff2;
+}
+.stats{
+	border-top:1px solid #ebeff2;
+	background:#f7f8fa;
+	overflow:auto;
+	padding:15px 0;
+	font-size:16px;
+	color:#59687f;
+	font-weight:600;
+	border-radius: 0 0 5px 5px;
+}
+.stats div{
+	border-right:1px solid #ebeff2;
+	width: 33.33333%;
+	float:left;
+	text-align:center
+}
+
+.stats div:nth-of-type(3){border:none;}
+
+div.footer {
+	text-align: right;
+	position: relative;
+	margin: 20px 5px;
+}
+
+div.footer a.Cbtn{
+	padding: 10px 25px;
+	background-color: #DADADA;
+	color: #666;
+	margin: 10px 2px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 3px;
+}
+
+div.footer a.Cbtn-primary{
+	background-color: #5AADF2;
+	color: #FFF;
+}
+
+div.footer a.Cbtn-primary:hover{
+	background-color: #7dbef5;
+}
+
+div.footer a.Cbtn-danger{
+	background-color: #fc5a5a;
+	color: #FFF;
+}
+
+div.footer a.Cbtn-danger:hover{
+	background-color: #fd7676;
+}
+
+//noty setting
+
+.noty_theme__mint {
+	border-radius: 50px!important;
+	padding-left: 8px!important;
+}
+
+//order page
+p {
+	margin-bottom: 0 !important;
+}
+
+a.link {
+	color: $primary;
+}
+
+.table-responsive{
+	display: table-caption!important;
+}
+
+
+
+/* The sidebar menu */
+.sidenav {
+height: 100%; /* Full-height: remove this if you want "auto" height */
+width: 160px; /* Set the width of the sidebar */
+position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+z-index: 1; /* Stay on top */
+top: 0; /* Stay at the top */
+left: 0;
+background-color: #111; /* Black */
+overflow-x: hidden; /* Disable horizontal scroll */
+padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+padding: 6px 8px 6px 16px;
+text-decoration: none;
+font-size: 25px;
+color: #818181;
+display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+margin-left: 160px; /* Same as the width of the sidebar */
+padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+.sidenav {padding-top: 15px;}
+.sidenav a {font-size: 18px;}
+} 
+
+//admin add product page
+.btn-send {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    width: 80%;
+    margin-left: 3px
+}
+
+.help-block.with-errors {
+    color: #ff5050;
+    margin-top: 5px
+}
+
+.card {
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+//status page
+
+section.status {
+    background: #FFF;
+    min-height: calc(100vh - 86px);
+}
+.status-box {
+    padding: 60px 0 0;
+}
+.status-box ul {
+    margin-left: 84px;
+}
+.status-box ul li span {
+    position: relative;
+    padding-left: 20px;
+}
+// Dots
+.status-box ul li span:after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top:50%;
+    background: $dark;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow:0 0 1px 10px $secondary;
+}
+
+// Icons
+.status-box ul li span:before{
+    font-family: "Line Awesome Free";
+    font-size: 46px;
+    font-weight: 600;
+    position: absolute;
+    left: -90px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: inherit;
+}
+.status-box ul li:nth-child(1) span:before {
+    content: '\f46c';
+}
+
+.status-box ul li:nth-child(2) span:before {
+    content: '\f560';
+}
+
+.status-box ul li:nth-child(3) span:before {
+    content: '\f818';
+}
+
+.status-box ul li:nth-child(4) span:before {
+    content: '\f0d1';
+}
+
+.status-box ul li:nth-child(5) span:before {
+    content: '\f582';
+}
+.status-box ul li {
+    position: relative;
+}
+// Line
+.status-box ul li:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: -6px;
+   width: 2px;
+   height: 100%;
+   background: $dark;
+   margin-top: 10px;
+}
+// Last dot
+.status-box ul li:nth-child(5) span:after {
+    box-shadow:0 20px 1px 20px $secondary;
+}
+
+// line
+.status-box ul li.step-completed:before {
+    background: $gray;
+}
+
+// dots
+.status-box ul li.step-completed span:after {
+    background: $gray;
+}
+
+// text
+.status-box ul li.step-completed span {
+    color: $gray;
+}
+
+// Current status
+.status-box ul li.current span {
+    color: $primary;
+}
+
+.status-box ul li.current span:after {
+    background: $primary;
+}
+
+.status-box ul li small {
+    float: right;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+@media(max-width:1060px) {
+    .container {
+        max-width: 90%;
+    }
+    table {
+       display: block;
+       overflow-x: auto;
+       white-space: nowrap;
+    }
+}
+
+@media(max-width: 768px) {
+    .status-box ul li span:before {
+        font-size: 34px;
+    }
+}
+
+
+//zoom view
+
+#img-container{
+  z-index: 1;
+  max-width: 500px;
+  position: relative;
+}
+
+#lens{
+  z-index: 2;
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  border: 2px solid black;
+  background-repeat: no-repeat;
+  cursor: none;
+}
+
