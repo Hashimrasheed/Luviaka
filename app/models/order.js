@@ -11,6 +11,7 @@ const orderSchema = new Schema({
     phone: {type: String, required: true},
     address: {type: String, required: true},
     paymentStatus: { type: String, default: 'failed'},
+    paymentMethod: {type: String, default: 'razorpay'},
     status: { type: String, default: 'order_placed'},
 }, { timestamps: true})
 

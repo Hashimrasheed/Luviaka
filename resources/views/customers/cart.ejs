@@ -15,20 +15,26 @@
                     <% for(let item of Object.values(session.cart.items)) { %>
                     <tbody>
                       <tr>
-                        <th scope="row"><img class="w-20 rounded-full" src="/img/<%= item.item.image %>" alt=""></th>
+                        <th scope="row"><img class="w-20 rounded-full" src="/img/products/<%= item.item.image %>" alt=""></th>
                         <td>
                             <div>
-                                <h5><%= item.item.name %> <br><%= item.item.discripsion %> </h5>
+                                <h5 class="pt-4"><%= item.item.name %> </h5>
                                 
                             </div>
                         </td>
                         <td>
-                            <span class=""><%= item.qty %> Pcs</span>
+                            <h5 class="pt-4"><%= item.qty %> Pcs</h5>
                         </td>
                         <td>
-                            <span class="font-bold text-lg">₹<%= item.item.price * item.qty %></span>
+                            <h5 class="font-bold text-lg pt-4">₹<%= item.item.price * item.qty %></h5>
+                        </td>
+                        <td>
+                            <form action="#" method="POST"  class="pt-4">
+                                <button type="submit" onclick="return confirm('Are you sure to delete?')" style="border: none;" >X</button>
+                              </form>
                         </td>
                       </tr>
+
                     </tbody>
                     <% } %>
                   </table>
@@ -36,17 +42,19 @@
             
         </div>
         <hr>
+        
         <div class="text-center py-4">
             <div class="text-right">
                 <span class="text-lg font-bold">Total Amound:</span>
                 <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice %></span>
             </div>
+            
             <% if(user) { %>
             <div class="mx-auto">
-                <form action="/orders" method="POST" class="mt-12">
-                    <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Pnone number">
-                    <input name="pinAddress" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Pin Address">
-                    <textarea name="address" class="border border-gray-400 p-2 w-1/2 mb-4" id="" cols="30" rows="5" placeholder="Address" ></textarea>
+                <form action="/cusomer/payment" method="POST" class="mt-12">
+                    <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Pnone number" required>
+                    <input name="pinAddress" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Pin Address"required>
+                    <textarea name="address" class="border border-gray-400 p-2 w-1/2 mb-4" id="" cols="30" rows="5" placeholder="Address" required ></textarea>
                     <div>
                         <input type="hidden" name="totalPrice" value="<%= session.cart.totalPrice %>">
                         <button class="btns-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">

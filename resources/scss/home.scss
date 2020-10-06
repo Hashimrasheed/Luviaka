@@ -44,15 +44,15 @@
         color: $white-color;
     }
 
-    &:after {
-        position: absolute;
-        right: 18px;
-        top: 9px;
-        content: '\33';
-        font-family: 'ElegantIcons';
-        font-size: 18px;
-        color: $white-color;
-    }
+    // &:after {
+    //     position: absolute;
+    //     right: 18px;
+    //     top: 9px;
+    //     content: '\33';
+    //     font-family: 'ElegantIcons';
+    //     font-size: 18px;
+    //     color: $white-color;
+    // }
 }
 
 .hero__categories {
@@ -191,7 +191,7 @@
 
     h2 {
         font-size: 46px;
-        color: $heading-color-2;
+        color: floralwhite;
         line-height: 52px;
         font-weight: 700;
         margin: 10px 0;

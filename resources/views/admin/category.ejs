@@ -3,7 +3,7 @@
 
  <!-- Page content -->
  <div class="main">
-     <div class="container mt-5">
+     <div class="container">
          <form action="/admin/addCategory" >
             <div class="float-right mb-3">
                 <button type="submit" class="btn btn-primary btn-lg">Add Category</button>
@@ -37,7 +37,7 @@
                 <td>
                   <form action="/admin/deleteCategory" method="POST"  class="pl-4">
                     <input type="hidden" value="<%= category[i]._id %>" name="id">
-                    <button type="submit" style="border: none;" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button type="submit" onclick="return confirm('Are you sure to delete?')" style="border: none;" ><i class="fa fa-trash" aria-hidden="true"></i></button>
                   </form>
                 </td>
                 

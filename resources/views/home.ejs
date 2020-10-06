@@ -11,15 +11,16 @@
           
           <div class="col-lg-9">
               
-              <div class="hero__item set-bg" style="background-image: url('/img/hero/homebanner.jpg')">
+              <div class="hero__item set-bg " style="background-image: url('/img/hero/luviakahero.jpg')">
                 <div ></div>
                   <div class="hero__text">
-                      <span>FRUIT FRESH</span>
-                      <h2>Vegetable <br />100% Organic</h2>
-                      <p>Free Pickup and Delivery Available</p>
+                      <span>PURE ART</span>
+                      <h2>ART PRODUCTS</h2>
+                      <h4 class="text-light">100% Handmade</h4>
+                      <p class="text-light pt-4">Free Pickup and Delivery Available</p>
                       <form action="#products">
-                        <button type="submit" class=" btn-dark my-4">
-                          <span class="primary-btn ">SHOP NOW</span>
+                        <button type="submit" class=" btn-dark my-3" style="border-radius: 30%;">
+                          <span class="primary-btn p-3">SHOP NOW</span>
                         </button>
                       </form>
                       
@@ -32,14 +33,12 @@
             <div class="hero__categories">
                 <div class="hero__categories__all">
                     <i class="fa fa-bars"></i>
-                    <span>All departments</span>
+                    <span>All Categories</span>
                 </div>
                 <ul>
-                    <li><a href="#">Fresh Meat</a></li>
-                    <li><a href="#">Vegetables</a></li>
-                    <li><a href="#">Fruit & Nut Gifts</a></li>
-                    <li><a href="#">Fresh Berries</a></li>
-                    <li><a href="#">Fresh Bananas</a></li>
+                  <% category.forEach(function(category) { %>
+                    <li><a style="text-decoration: none;" href="#products"><%= category.category %></a></li>
+                  <% }) %>
                 </ul>
             </div>
         </div>
@@ -77,13 +76,12 @@
                   <div class="wrapper">
                     <form action="/product">
                       <div class="banner-img h-40 flex items-center justify-around">
-                        <a href="/products/<%= item._id %>"><img style="margin: auto;" src="/img/<%= item.image %>" alt="Image"></a>
+                        <a href="/products/<%= item._id %>"><img style="margin: auto; width: 50%;" src="/img/products/<%= item.image %>" alt="Image"></a>
                         
                         
                       </div>
                     </form>
-                     
-
+                    
                       <div class="header" ><%= item.name %></div>
                       
                       <div class="footer flex items-center justify-around mt-6">
@@ -104,21 +102,185 @@
         </div>
     </div>
 </section>
+<!-- category selector -->
 
-<!-- popups -->
 
-<!-- contact div -->
-<div class="hero__search">
-                  
-  <div class="hero__search__phone">
-      <div class="hero__search__phone__icon">
-          <i class="fa fa-phone"></i>
-      </div>
-      <div class="hero__search__phone__text">
-          <h5>+91 83019-41618</h5>
-          <span>support 24/7 time</span>
-      </div>
+<div class="container my-4">
+
+  
+  <hr class="my-4">
+
+  <!--Carousel Wrapper-->
+  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+    <!--Controls-->
+    <!-- <div class="controls-top justify-center">
+      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+    </div> -->
+    <!--/.Controls-->
+
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+      <li data-target="#multi-item-example" data-slide-to="1"></li>
+      <li data-target="#multi-item-example" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <!-- <div class="carousel-item active">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+      <!--/.First slide-->
+
+      <!--Second slide-->
+      <!-- <div class="carousel-item">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(47).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(48).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+      <!--/.Second slide-->
+
+      <!--Third slide-->
+      <!-- <div class="carousel-item">
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(53).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 clearfix d-none d-md-block">
+            <div class="card mb-2">
+              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(51).jpg"
+                alt="Card image cap">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+      <!--/.Third slide-->
+
+    </div>
+    <!--/.Slides-->
+
   </div>
+  <!--/.Carousel Wrapper-->
+
+
 </div>
+
+
 
 <%- include('partials/footer.ejs') %>

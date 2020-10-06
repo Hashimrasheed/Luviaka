@@ -3,7 +3,7 @@
 
  <!-- Page content -->
  <div class="main">
-     <div class="container mt-5">
+     <div class="container ">
          <form action="/admin/addProduct" >
             <div class="float-right mb-3">
                 <button type="submit" class="btn btn-primary btn-lg">Add Products</button>
@@ -25,7 +25,7 @@
               <% for(let i = 0;i < menus.length; i++) { %>
               <tr>
                 <th scope="row"><%= [i+1] %></th>
-                <td><img class="img-fluid rounded" style="width: 70px;" src="/img/<%= menus[i].image %>" alt=""></td>
+                <td><img class="img-fluid rounded" style="width: 70px;" src="/img/products/<%= menus[i].image %>" alt=""></td>
                 <td><%= menus[i].name %></td>
                 <td><%= menus[i].price %></td>
                 <td>
@@ -37,7 +37,7 @@
                 <td>
                   <form action="/admin/deleteProduct" method="POST">
                     <input type="hidden" name="id" value="<%= menus[i]._id %>">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" onclick="return confirm('Are you sure to delete?')"  class="btn btn-danger">Delete</button>
                   </form>
                 </td>
               </tr>
@@ -50,9 +50,6 @@
 
     
   </div> 
-
-
-
   
 
 <%- include('../partials/adminfooter.ejs') %>

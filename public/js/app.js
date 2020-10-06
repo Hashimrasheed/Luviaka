@@ -26848,9 +26848,16 @@ function initAdmin() {
     }).join('');
   }
 
+  function renderPrice(items) {
+    var parsedItems = Object.values(items);
+    return parsedItems.map(function (menuItem) {
+      return "\n          <div class=\"text-right\">\n              <span >\u20B9".concat(menuItem.item.price * menuItem.qty, "</span>\n          </div>");
+    }).join('');
+  }
+
   function generateMarkup(orders) {
     return orders.map(function (order) {
-      return "\n                <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <div>".concat(renderItems(order.items), "</div>\n                </td>\n                <td class=\"border px-4 py-2\">").concat(order.customerId.name, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.address, "<br>").concat(order.phone, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', ">\n                                    Placed</option>\n                                <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                    Confirmed</option>\n                                <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                    Prepared</option>\n                                <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">\n                                    Delivered\n                                </option>\n                                <option value=\"completed\" ").concat(order.status === 'completed' ? 'selected' : '', ">\n                                    Completed\n                                </option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n            </tr>\n        ");
+      return "\n                <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <div>".concat(renderItems(order.items), "</div>\n                </td>\n                <td class=\"border px-4 py-2\">").concat(order.customerId.name, "</td>\n                \n                <td class=\"border px-4 py-2\">").concat(renderPrice(order.items), "\n                </td>\n\n                <td class=\"border px-4 py-2\">").concat(order.address, "<br>").concat(order.phone, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.paymentMethod, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order placed' ? 'selected' : '', ">\n                                    Placed</option>\n                                <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                    Confirmed</option>\n                                <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                    Prepared</option>\n                                <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">\n                                    Delivered\n                                </option>\n                                <option value=\"completed\" ").concat(order.status === 'completed' ? 'selected' : '', ">\n                                    Completed\n                                </option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mmA'), "\n                </td>\n            </tr>\n        ");
     }).join('');
   }
 }
@@ -27016,211 +27023,194 @@ function imageZoom(imgID) {
 }
 
 imageZoom('featured'); //organi template
-
-'use strict';
-
-(function ($) {
-  /*------------------
-      Preloader
-  --------------------*/
-  $(window).on('load', function () {
-    $(".loader").fadeOut();
-    $("#preloder").delay(200).fadeOut("slow");
-    /*------------------
-        Gallery filter
-    --------------------*/
-
-    $('.featured__controls li').on('click', function () {
-      $('.featured__controls li').removeClass('active');
-      $(this).addClass('active');
-    });
-
-    if ($('.featured__filter').length > 0) {
-      var containerEl = document.querySelector('.featured__filter');
-      var mixer = mixitup(containerEl);
-    }
-  });
-  /*------------------
-      Background Set
-  --------------------*/
-
-  $('.set-bg').each(function () {
-    var bg = $(this).data('setbg');
-    $(this).css('background-image', 'url(' + bg + ')');
-  }); //Humberger Menu
-
-  $(".humberger__open").on('click', function () {
-    $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
-    $(".humberger__menu__overlay").addClass("active");
-    $("body").addClass("over_hid");
-  });
-  $(".humberger__menu__overlay").on('click', function () {
-    $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
-    $(".humberger__menu__overlay").removeClass("active");
-    $("body").removeClass("over_hid");
-  });
-  /*------------------
-  Navigation
-  --------------------*/
-
-  $(".mobile-menu").slicknav({
-    prependTo: '#mobile-menu-wrap',
-    allowParentLinks: true
-  });
-  /*-----------------------
-      Categories Slider
-  ------------------------*/
-
-  $(".categories__slider").owlCarousel({
-    loop: true,
-    margin: 0,
-    items: 4,
-    dots: false,
-    nav: true,
-    navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    smartSpeed: 1200,
-    autoHeight: false,
-    autoplay: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      480: {
-        items: 2
-      },
-      768: {
-        items: 3
-      },
-      992: {
-        items: 4
-      }
-    }
-  });
-  $('.hero__categories__all').on('click', function () {
-    $('.hero__categories ul').slideToggle(400);
-  });
-  /*--------------------------
-      Latest Product Slider
-  ----------------------------*/
-
-  $(".latest-product__slider").owlCarousel({
-    loop: true,
-    margin: 0,
-    items: 1,
-    dots: false,
-    nav: true,
-    navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
-    smartSpeed: 1200,
-    autoHeight: false,
-    autoplay: true
-  });
-  /*-----------------------------
-      Product Discount Slider
-  -------------------------------*/
-
-  $(".product__discount__slider").owlCarousel({
-    loop: true,
-    margin: 0,
-    items: 3,
-    dots: true,
-    smartSpeed: 1200,
-    autoHeight: false,
-    autoplay: true,
-    responsive: {
-      320: {
-        items: 1
-      },
-      480: {
-        items: 2
-      },
-      768: {
-        items: 2
-      },
-      992: {
-        items: 3
-      }
-    }
-  });
-  /*---------------------------------
-      Product Details Pic Slider
-  ----------------------------------*/
-
-  $(".product__details__pic__slider").owlCarousel({
-    loop: true,
-    margin: 20,
-    items: 4,
-    dots: true,
-    smartSpeed: 1200,
-    autoHeight: false,
-    autoplay: true
-  });
-  /*-----------------------
-  Price Range Slider
-  ------------------------ */
-
-  var rangeSlider = $(".price-range"),
-      minamount = $("#minamount"),
-      maxamount = $("#maxamount"),
-      minPrice = rangeSlider.data('min'),
-      maxPrice = rangeSlider.data('max');
-  rangeSlider.slider({
-    range: true,
-    min: minPrice,
-    max: maxPrice,
-    values: [minPrice, maxPrice],
-    slide: function slide(event, ui) {
-      minamount.val('$' + ui.values[0]);
-      maxamount.val('$' + ui.values[1]);
-    }
-  });
-  minamount.val('$' + rangeSlider.slider("values", 0));
-  maxamount.val('$' + rangeSlider.slider("values", 1));
-  /*--------------------------
-      Select
-  ----------------------------*/
-
-  $("select").niceSelect();
-  /*------------------
-  Single Product
-  --------------------*/
-
-  $('.product__details__pic__slider img').on('click', function () {
-    var imgurl = $(this).data('imgbigurl');
-    var bigImg = $('.product__details__pic__item--large').attr('src');
-
-    if (imgurl != bigImg) {
-      $('.product__details__pic__item--large').attr({
-        src: imgurl
-      });
-    }
-  });
-  /*-------------------
-  Quantity change
-  --------------------- */
-
-  var proQty = $('.pro-qty');
-  proQty.prepend('<span class="dec qtybtn">-</span>');
-  proQty.append('<span class="inc qtybtn">+</span>');
-  proQty.on('click', '.qtybtn', function () {
-    var $button = $(this);
-    var oldValue = $button.parent().find('input').val();
-
-    if ($button.hasClass('inc')) {
-      var newVal = parseFloat(oldValue) + 1;
-    } else {
-      // Don't allow decrementing below zero
-      if (oldValue > 0) {
-        var newVal = parseFloat(oldValue) - 1;
-      } else {
-        newVal = 0;
-      }
-    }
-
-    $button.parent().find('input').val(newVal);
-  });
-})(jQuery);
+// 'use strict';
+// (function ($) {
+//     /*------------------
+//         Preloader
+//     --------------------*/
+//     $(window).on('load', function () {
+//         $(".loader").fadeOut();
+//         $("#preloder").delay(200).fadeOut("slow");
+//         /*------------------
+//             Gallery filter
+//         --------------------*/
+//         $('.featured__controls li').on('click', function () {
+//             $('.featured__controls li').removeClass('active');
+//             $(this).addClass('active');
+//         });
+//         if ($('.featured__filter').length > 0) {
+//             var containerEl = document.querySelector('.featured__filter');
+//             var mixer = mixitup(containerEl);
+//         }
+//     });
+//     /*------------------
+//         Background Set
+//     --------------------*/
+//     $('.set-bg').each(function () {
+//         var bg = $(this).data('setbg');
+//         $(this).css('background-image', 'url(' + bg + ')');
+//     });
+//     //Humberger Menu
+//     $(".humberger__open").on('click', function () {
+//         $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
+//         $(".humberger__menu__overlay").addClass("active");
+//         $("body").addClass("over_hid");
+//     });
+//     $(".humberger__menu__overlay").on('click', function () {
+//         $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
+//         $(".humberger__menu__overlay").removeClass("active");
+//         $("body").removeClass("over_hid");
+//     });
+//     /*------------------
+// 		Navigation
+// 	--------------------*/
+//     $(".mobile-menu").slicknav({
+//         prependTo: '#mobile-menu-wrap',
+//         allowParentLinks: true
+//     });
+//     /*-----------------------
+//         Categories Slider
+//     ------------------------*/
+//     $(".categories__slider").owlCarousel({
+//         loop: true,
+//         margin: 0,
+//         items: 4,
+//         dots: false,
+//         nav: true,
+//         navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
+//         animateOut: 'fadeOut',
+//         animateIn: 'fadeIn',
+//         smartSpeed: 1200,
+//         autoHeight: false,
+//         autoplay: true,
+//         responsive: {
+//             0: {
+//                 items: 1,
+//             },
+//             480: {
+//                 items: 2,
+//             },
+//             768: {
+//                 items: 3,
+//             },
+//             992: {
+//                 items: 4,
+//             }
+//         }
+//     });
+//     $('.hero__categories__all').on('click', function(){
+//         $('.hero__categories ul').slideToggle(400);
+//     });
+//     /*--------------------------
+//         Latest Product Slider
+//     ----------------------------*/
+//     $(".latest-product__slider").owlCarousel({
+//         loop: true,
+//         margin: 0,
+//         items: 1,
+//         dots: false,
+//         nav: true,
+//         navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
+//         smartSpeed: 1200,
+//         autoHeight: false,
+//         autoplay: true
+//     });
+//     /*-----------------------------
+//         Product Discount Slider
+//     -------------------------------*/
+//     $(".product__discount__slider").owlCarousel({
+//         loop: true,
+//         margin: 0,
+//         items: 3,
+//         dots: true,
+//         smartSpeed: 1200,
+//         autoHeight: false,
+//         autoplay: true,
+//         responsive: {
+//             320: {
+//                 items: 1,
+//             },
+//             480: {
+//                 items: 2,
+//             },
+//             768: {
+//                 items: 2,
+//             },
+//             992: {
+//                 items: 3,
+//             }
+//         }
+//     });
+//     /*---------------------------------
+//         Product Details Pic Slider
+//     ----------------------------------*/
+//     $(".product__details__pic__slider").owlCarousel({
+//         loop: true,
+//         margin: 20,
+//         items: 4,
+//         dots: true,
+//         smartSpeed: 1200,
+//         autoHeight: false,
+//         autoplay: true
+//     });
+//     /*-----------------------
+// 		Price Range Slider
+// 	------------------------ */
+//     var rangeSlider = $(".price-range"),
+//         minamount = $("#minamount"),
+//         maxamount = $("#maxamount"),
+//         minPrice = rangeSlider.data('min'),
+//         maxPrice = rangeSlider.data('max');
+//     rangeSlider.slider({
+//         range: true,
+//         min: minPrice,
+//         max: maxPrice,
+//         values: [minPrice, maxPrice],
+//         slide: function (event, ui) {
+//             minamount.val('$' + ui.values[0]);
+//             maxamount.val('$' + ui.values[1]);
+//         }
+//     });
+//     minamount.val('$' + rangeSlider.slider("values", 0));
+//     maxamount.val('$' + rangeSlider.slider("values", 1));
+//     /*--------------------------
+//         Select
+//     ----------------------------*/
+//     $("select").niceSelect();
+//     /*------------------
+// 		Single Product
+// 	--------------------*/
+//     $('.product__details__pic__slider img').on('click', function () {
+//         var imgurl = $(this).data('imgbigurl');
+//         var bigImg = $('.product__details__pic__item--large').attr('src');
+//         if (imgurl != bigImg) {
+//             $('.product__details__pic__item--large').attr({
+//                 src: imgurl
+//             });
+//         }
+//     });
+//     /*-------------------
+// 		Quantity change
+// 	--------------------- */
+//     var proQty = $('.pro-qty');
+//     proQty.prepend('<span class="dec qtybtn">-</span>');
+//     proQty.append('<span class="inc qtybtn">+</span>');
+//     proQty.on('click', '.qtybtn', function () {
+//         var $button = $(this);
+//         var oldValue = $button.parent().find('input').val();
+//         if ($button.hasClass('inc')) {
+//             var newVal = parseFloat(oldValue) + 1;
+//         } else {
+//             // Don't allow decrementing below zero
+//             if (oldValue > 0) {
+//                 var newVal = parseFloat(oldValue) - 1;
+//             } else {
+//                 newVal = 0;
+//             }
+//         }
+//         $button.parent().find('input').val(newVal);
+//     });
+// })(jQuery);
 
 /***/ }),
 

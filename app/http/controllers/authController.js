@@ -1,4 +1,5 @@
 const User = require('../../models/user')
+const Category = require('../../models/category');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 

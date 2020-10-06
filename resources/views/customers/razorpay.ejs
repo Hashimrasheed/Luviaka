@@ -1,0 +1,152 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/nav.ejs') %>
+
+
+<section class="login flex justify-center pt-20">
+    <div class="w-full max-w-xs">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="card-header bg-transparent border-success">Select Payment Methode</div>
+            <div class="mb-4 mt-5 ml-3">
+                        
+            <input class="form-check-input" type="radio" name="payment" id="razorpay" value="razorpay" checked >
+                    <label class="form-check-label" for="exampleRadios1">
+                      Razorpay
+                    </label>
+          </div>
+          <div class="mb-6 mt-5 ml-3">
+            <input class="form-check-input" type="radio" name="payment" id="cod" value="cod" >
+                    <label class="form-check-label" for="exampleRadios1">
+                      Cash On Delivery
+                    </label>
+          </div>
+          <div class="flex items-center justify-between">
+            <input type="hidden" id="totalPrice" name="totalPrice" value="<%= totalPrice %>">
+            <input type="hidden" name="id" value="<%= orderid %>">
+            <button id="paymetclicked" class="btns-primary rounded-full text-white font-bold py-2 px-2 focus:outline-none focus:shadow-outline" type="button">
+              Submit
+            </button>
+            
+          </div>
+        </form>
+        
+      </div>
+</section>
+
+
+
+<!-- 
+<button id="checkout">checkout</button>
+<button id="verify">Verify</button> -->
+
+<input type="hidden" id="totalPrice" name="totalPrice" value="<%= totalPrice %>">
+<input type="hidden" name="id" value="<%= orderid %>">
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    const totalPrice = document.getElementById('totalPrice').value;
+    let order_id, order_pay_id, order_sig;
+
+
+    // if (document.getElementById('razorpay').checked) {
+    //   value = document.getElementById('razorpay').value;
+    //   console.log('hisfs');
+    // }
+    window.onload = function () {
+        $("#paymetclicked").click();
+    }
+    document.getElementById("paymetclicked").addEventListener("click", ()=> {
+        return new Promise((resolve, reject) => {
+            let url = 'http://localhost:3000/razorpay';
+        let params = {
+            amount: totalPrice * 100,
+            currency: "INR",
+            receipt: "su001",
+            payment_capture: '1'
+        };
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function (res) {
+            if (xhr.readyState === 4) {
+                res = JSON.parse(xhr.responseText);
+                // console.log(res);
+                order_id = res.sub.id;
+                console.log(order_id);
+                if(order_id) {
+                    console.log(order_id);
+                    resolve();
+                } else{
+                    reject();
+                }
+                
+
+            }
+        }
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send(JSON.stringify(params));
+        }).then(paybill)
+        
+    })
+    
+
+    // document.getElementById("checkout").addEventListener("click", 
+    function paybill () {
+        return new Promise((resolve, reject) => {
+            let options = {
+            "key": "rzp_test_045PrguGI74mB6",  //Enter your razorpay key
+            "currency": "INR",
+            "name": "Razor Tutorial",
+            "description": "Razor Test Transaction",
+            "image": "https://previews.123rf.com/images/subhanbaghirov/subhanbaghirov1605/subhanbaghirov160500087/56875269-vector-light-bulb-icon-with-concept-of-idea-brainstorming-idea-illustration-.jpg",
+            "order_id": order_id,
+            "handler": async function (response) {
+                order_pay_id = await response.razorpay_payment_id;
+                order_id = await response.razorpay_order_id;
+                order_sig = await response.razorpay_signature;
+                if(order_pay_id && order_id && order_sig) {
+                    resolve();
+                }else {
+                    reject();
+                }
+            },
+            "theme": {
+                "color": "#227254"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+        }).then(verify)
+        
+    }
+        
+    function verify () {
+        return new Promise((resolve, reject) => {
+            var url = 'http://localhost:3000/razorpayvarify';
+        var params = {
+            razorpay_order_id: order_id,
+            razorpay_payment_id: order_pay_id,
+            razorpay_signature: order_sig
+        };
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function (res) {
+            if (xmlHttp.readyState === 4) {
+                location.href = '/customer/orders'
+            }
+        }
+        xmlHttp.open("POST", url, true); // false for synchronous request
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send(JSON.stringify(params));
+        })
+    
+        
+    }
+
+    function retunToOrders() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "/customer/orders", true); // false for synchronous request
+        xhr.send();
+    }
+
+</script>
+
+<%- include('../partials/footer.ejs') %>

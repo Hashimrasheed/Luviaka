@@ -5,7 +5,8 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const app = express.Router();
 const homeController = require('../app/http/controllers/homeController');
 const guest = require('../app/http/middleware/guest')
-const auth = require('../app/http/middleware/auth')
+const auth = require('../app/http/middleware/auth');
+const order = require('../app/models/order');
 
 
 app.get('/', homeController().index)
@@ -21,7 +22,7 @@ app.get('/cart', cartController().index)
 app.post('/update-cart', cartController().update);
 
 //Customer routes
-app.post('/orders', auth, orderController().store)
+app.post('/cusomer/payment', auth, orderController().store)
 app.get('/customer/orders', auth, orderController().index)
 app.get('/customer/orders/:id', auth, orderController().status)
 
@@ -29,7 +30,10 @@ app.get('/customer/orders/:id', auth, orderController().status)
 app.get('/products/:_id', auth, orderController().detailedView)
 //payment
 app.get('/customers/payments', auth, orderController().paymentSelect)
+// app.get('/razorpay',auth, orderController().getrazorpay)
 app.post('/customer/payment/razorpay', auth, orderController().razorpay)
 app.post('/razorpay', auth, orderController().razorpay )
 app.post('/razorpayvarify', auth, orderController().razorpayVerify)
+app.post('/postpaymentSelect', auth, orderController().postselectpay)
+
 module.exports = app;

@@ -28,6 +28,16 @@ export function initAdmin() {
         }).join('')
       }
 
+      function renderPrice(items){
+        let parsedItems = Object.values(items)
+        return parsedItems.map((menuItem) => {
+          return `
+          <div class="text-right">
+              <span >₹${menuItem.item.price * menuItem.qty}</span>
+          </div>`
+        }).join('')
+      }
+
     function generateMarkup(orders) {
         return orders.map(order => {
             return `
@@ -36,7 +46,12 @@ export function initAdmin() {
                     <div>${ renderItems(order.items) }</div>
                 </td>
                 <td class="border px-4 py-2">${ order.customerId.name }</td>
+                
+                <td class="border px-4 py-2">${ renderPrice(order.items) }
+                </td>
+
                 <td class="border px-4 py-2">${ order.address }<br>${ order.phone }</td>
+                <td class="border px-4 py-2">${ order.paymentMethod }</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
                         <form action="/admin/order/status" method="POST">
@@ -44,7 +59,7 @@ export function initAdmin() {
                             <select name="status" onchange="this.form.submit()"
                                 class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="order_placed"
-                                    ${ order.status === 'order_placed' ? 'selected' : '' }>
+                                    ${ order.status === 'order placed' ? 'selected' : '' }>
                                     Placed</option>
                                 <option value="confirmed" ${ order.status === 'confirmed' ? 'selected' : '' }>
                                     Confirmed</option>
@@ -69,7 +84,7 @@ export function initAdmin() {
                     </div>
                 </td>
                 <td class="border px-4 py-2">
-                    ${ moment(order.createdAt).format('hh:mm A') }
+                    ${ moment(order.createdAt).format('hh:mmA') }
                 </td>
             </tr>
         `

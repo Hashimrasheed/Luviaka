@@ -10,18 +10,25 @@
             <p class="px-2"><%= messages.success %></p>
         </div>
         <% } %>
-        <table class="w-full justify-center table-auto bg-white table table-striped table-responsive">
+
+
+        <table class="w-full table-auto bg-white table table-bordered" style="min-height: 1vh;">
             <thead>
                 <tr>
                     <th class="px-4 py-2 text-left">Orders</th>
-                    <th class="px-4 py-2 text-left">phone</th>
-                    <th class="px-4 py-2 text-left">Address</th>
-                    <th class="px-4 py-2 text-left">Time</th>
+                    <th class="px-4 py-2 text-left">Total Price</th>
+                    <div class="text-right">
+                    <th class="px-4 py-2 text-left">
+                            Ordered time
+                    </th>
+                    </div>
+                    <th class="px-4 py-2 text-left" >Status</th>
+                    <th class="px-4 py-2 text-left" >Track Order</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="table">
                 <% if(order.length) { %>
-                    <% order.forEach((order) => { %>
+                    <!-- <% order.forEach((order) => { %>
                         <tr>
                             <td class="border px-4 py-2">
                                 <a class="link" href="/customer/orders/<%= order._id %>"><%= order.items %></a>
@@ -36,7 +43,8 @@
                                 <%= moment(order.createdAt).format('hh:mm A') %>
                             </td>
                         </tr>
-                    <% }) %>
+                    <% }) %> -->
+
                 <% } else { %>
                     <tr>
                         <td class="p-4"><span>No orders found!</span></td>
@@ -47,5 +55,70 @@
 
     </div>
 </section>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+<script>
+    orderHistery();
+
+function orderHistery() {
+    let orders = [];
+    let markup;
+
+    const table = document.getElementById('table');
+    axios.get('/customer/orders', {
+      headers: { 'X-Requested-with': 'XMLHttpRequest' }
+    }).then((results) => {
+      results.data.forEach((result)=>{
+        if(result.status !== 'compleated' && result.paymentStatus == 'success'){
+          orders.push(result)
+        }
+      })
+      markup = generateMarkup(orders);
+      table.innerHTML = markup;
+      console.log(orders);
+      
+    })
+    function renderPrice(items){
+      let parsedItems = Object.values(items)
+      return parsedItems.map((menuItem) => {
+        return `
+        <p >${menuItem.item.name}-${menuItem.qty}Pcs </p>
+        <div class="text-right">
+            <span >₹ ${menuItem.item.price * menuItem.qty}</span>
+        </div>`
+      }).join('')
+    }
+    function renderPics(items) {
+      let parsedItems = Object.values(items)
+      return parsedItems.map((menuItem) => {
+        return `<div class="p-1 ml-4">
+        <img src="/img/products/${menuItem.item.image}" style="width : 40px">
+        </div>`
+      }).join('')
+    }
+    function generateMarkup(orders) {
+      return orders.map(order => {
+        return `<tr>
+            
+                <td class="class="border px-5 py-2 " >
+                    <div>
+                        ${renderPics(order.items)}
+                    </div>
+                </td>
+            
+                <td class="class="border px-4 py-2">${renderPrice(order.items)}</td>
+                <td class="class="border px-4 py-2">
+                    ${moment(order.createdAt).format('dddd, YYYY-MM-DD')}</td>
+                <td class="class="border px-4 py-2">${order.status}</td>
+
+        <td class="class="border px-4 py-2 track-order"><a href="/customer/orders/${order._id}" class="" style="color: #7fad39;">Track your Order👇</a></td>
+        </tr>`
+      }).join('');
+    }
+}
+    
+</script>
+
 
 <%- include('../partials/footer.ejs') %>

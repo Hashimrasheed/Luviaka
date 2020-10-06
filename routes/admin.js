@@ -27,7 +27,7 @@ app.use(session({
 //admin routes
 app.get('/login', adminAuthController().login)
 app.post('/login', adminAuthController().postlogin)
-
+app.get('/logout', adminAuthController().logout)
 
 app.get('/orders', admin, adminOrderController().index)
 app.get('/allProducts', admin, adminOrderController().allProducts)

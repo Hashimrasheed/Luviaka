@@ -1,6 +1,6 @@
 
 const Order = require('../../../models/order')
-
+const User = require('../../../models/user')
 const Menu = require('../../../models/menu')
 const Category = require('../../../models/category')
 const multer = require('multer')
@@ -13,7 +13,7 @@ const category = require('../../../models/category');
 
 var Storage = multer.diskStorage({
     destination: function (req, file, callback) {
-      callback(null, "public/img");
+      callback(null, "public/img/products");
     },
     filename: function (req, file, callback) {
       callback(null, file.fieldname + "_" + Date.now() + "_" + path.extname(file.originalname));
@@ -43,11 +43,16 @@ function orderController() {
         },
         dashboard(req, res) { 
 
-            Order.count().then((count) => {
-                Order.find({status: 'completed'}).count().then((completed) => {
-                    let pending = count - completed;
-                    console.log(pending);
-                    res.render('admin/dashboard', { orders: count, pending: pending})
+            Order.countDocuments().then((count) => {
+                Order.find({status: 'completed'}).countDocuments().then((completed) => {
+                    User.find({}).countDocuments().then((customerCount) => {
+                        Menu.find({}).countDocuments().then((totalMenu) => {
+                            let pending = count - completed;
+                        res.render('admin/dashboard', { orders: count, pending: pending, customerCount, totalMenu})
+                        })
+                        
+                    })
+                   
                 })
                 
                 

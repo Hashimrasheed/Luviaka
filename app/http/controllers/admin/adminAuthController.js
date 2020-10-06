@@ -14,11 +14,16 @@ function adminAuthController() {
             req.session.email = email;
             req.session.password = password
             if(req.body.email === email && req.body.password === password) {
-                res.redirect('/admin/orders')
+                res.redirect('/admin/dashboard')
             } else {
                 res.redirect('/admin/login')
 
             }
+        },
+        logout(req, res){
+            req.session.destroy();
+            res.clearCookie('adminCookie')
+            res.redirect('/admin/login')
         }
     }
 }

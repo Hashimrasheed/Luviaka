@@ -2,6 +2,9 @@
 <%- include('../partials/adminnav.ejs') %>
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
+
 <div class="main">
     <div class="container">
         <div class=" text-center mt-5 ">
@@ -42,8 +45,32 @@
                                     <div class="col-md-12">
                                         <label for="form_image">Product image</label>
                                         <br>
-                                        <img src="/img/<%= menus.image %>" style="width: 4rem; height: 4rem;" alt="">
-                                        <input type="file" value="<%= menus.image %>" id="myFile" name="image">
+                                        <input type="file" value="<%= menus.image %>" accept="image/*" onchange="loadFile(event)" id="myFile" name="image">
+                                        <div>
+                                            <img class="m-3" src="/img/products/<%= menus.image %>" id="output" style="width: 50px;"/>
+                                        </div>
+                                        <main class="page">
+                                            <!-- leftbox -->
+                                            <div class="box-2">
+                                                <div class="result"></div>
+                                            </div>
+                                            <!--rightbox-->
+                                            <div class="box-2 img-result hide">
+                                                <!-- result of crop -->
+                                                <img class="cropped" src="" alt="">
+                                            </div>
+                                            <!-- input file -->
+                                            <div class="box">
+                                                <div class="options hide">
+                                                    <!-- <label > Width</label> -->
+                                                    <input type="hidden" class="img-w" value="300" min="100" max="1200" />
+                                                </div>
+                                                <!-- save btn -->
+                                                <button class="btn-2 save hide" style="margin-bottom: 3rem;">Save</button>
+                                                <!-- download btn -->
+                                                <a href="" class="btn-2 download hide">Download</a>
+                                            </div>
+                                        </main>
                                         <br>
                                     </div>
                                 </div>
@@ -67,5 +94,122 @@
    
 </div> 
 
+
+<style>
+    
+    .page {
+        margin: 1em auto;
+        max-width: 768px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        height: 100%;
+    }
+    
+    .box {
+        padding-bottom: 0.5em;
+        width: 100%;
+        margin-bottom:0.5em;
+    }
+    
+    .box-2 {
+        padding: 0.5em;
+        width: calc(100%/2 - 1em);
+    }
+    
+    /* .options label,
+    .options input{ */
+        /* width:4em; */
+        /* padding:0.5em 1em; */
+    /* } */
+    .btn-2{
+        background:white;
+        color:black;
+        border:1px solid black;
+        padding: 0.5em 1em;
+        text-decoration:none;
+        margin:0.8em 0.3em;
+        display:inline-block;
+        cursor:pointer;
+    }
+    
+    .hide {
+        display: none;
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    </style>
+    
+    <script>
+       
+    
+    </script>
+    
+
+
+<script>
+    
+    
+        //image croping
+       // vars
+    let result = document.querySelector('.result'),
+    img_result = document.querySelector('.img-result'),
+    img_w = document.querySelector('.img-w'),
+    img_h = document.querySelector('.img-h'),
+    options = document.querySelector('.options'),
+    save = document.querySelector('.save'),
+    cropped = document.querySelector('.cropped'),
+    dwn = document.querySelector('.download'),
+    upload = document.querySelector('#myFile'),
+    cropper = '';
+    
+    // on change show image with crop options
+    upload.addEventListener('change', (e) => {
+      if (e.target.files.length) {
+            // start file reader
+        const reader = new FileReader();
+        reader.onload = (e)=> {
+          if(e.target.result){
+                    // create new image
+                    let img = document.createElement('img');
+                    img.id = 'image';
+                    img.src = e.target.result
+                    // clean result before
+                    result.innerHTML = '';
+                    // append new image
+            result.appendChild(img);
+                    // show save btn and options
+                    save.classList.remove('hide');
+                    options.classList.remove('hide');
+                    // init cropper
+                    cropper = new Cropper(img);
+          }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+    
+    // save on click
+    save.addEventListener('click',(e)=>{
+      e.preventDefault();
+      // get result to data uri
+      let imgSrc = cropper.getCroppedCanvas({
+            width: img_w.value // input value
+        }).toDataURL();
+      // remove hide class of img
+      cropped.classList.remove('hide');
+        img_result.classList.remove('hide');
+        // show image cropped
+      cropped.src = imgSrc;
+      dwn.classList.remove('hide');
+      dwn.download = 'imagename.png';
+      dwn.setAttribute('href',imgSrc);
+    });
+    
+    
+</script>
 
 <%- include('../partials/adminfooter.ejs') %>

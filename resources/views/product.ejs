@@ -14,34 +14,34 @@
 								<div class="tab-pane active" id="pic-1">
 									<div id="img-container">
 										<div id="lens"></div>
-										<img id="featured" src="/img/<%= item.image %>" />
+										<img id="featured" src="/img/products/<%= item.image %>" />
 									</div>
 									
 								</div>
 						  
-						  <div class="tab-pane" id="pic-2"><img src="/img/<%= item.image %>" /></div>
-						  <div class="tab-pane" id="pic-3"><img src="/img/<%= item.image %>" /></div>
-						  <div class="tab-pane" id="pic-4"><img src="/img/<%= item.image %>" /></div>
-						  <div class="tab-pane" id="pic-5"><img src="/img/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-2"><img src="/img/products/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-3"><img src="/img/products/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-4"><img src="/img/products/<%= item.image %>" /></div>
+						  <div class="tab-pane" id="pic-5"><img src="/img/products/<%= item.image %>" /></div>
 						</div>
-						<ul class="preview-thumbnail nav nav-tabs">
+						<!-- <ul class="preview-thumbnail nav nav-tabs">
 						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
 						  <li><a data-target="#pic-2" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
 						  <li><a data-target="#pic-3" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
 						  <li><a data-target="#pic-4" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
 						  <li><a data-target="#pic-5" data-toggle="tab"><img src="/img/<%= item.image %>" /></a></li>
-						</ul>
+						</ul> -->
 						
 					</div>
 					<div class="details col-md-6">
 						<h3 class="product-title"><%= item.name %></h3>
 						<div class="rating">
 							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star checked"></span>
 							</div>
 							<span class="review-no">41 reviews</span>
 						</div>
@@ -60,7 +60,7 @@
 								<span class="ml-4">Add</span>
 							</button>
 							<form action="/cart" class="ml-5">
-								<button type="submit" style="width: min-content;" class="add-to-cart py-1 px-6 rounded-full text-white flex items-center font-bold">
+								<button type="submit" data-item="<%= JSON.stringify(item) %>" style="width: min-content;" class="add-to-cart text-white py-1 px-6 rounded-full flex items-center font-bold">
 									<span>Buy</span>
 									<span>Now</span>
 									 
@@ -77,11 +77,9 @@
 </section>
 
 <footer>
-	<h1>dflk</h1>
 </footer>
 
 <script>
-          JavaScript
 
 // Material Select Initialization
 $(document).ready(function() {
