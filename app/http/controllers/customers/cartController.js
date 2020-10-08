@@ -34,6 +34,38 @@ function cartController() {
                 cart.totalPrice = cart.totalPrice + req.body.price
             }
             return res.json({ totalQty: req.session.cart.totalQty})
+        },
+        updateupqty(req, res) {
+            let cart = req.session.cart;
+            cart.items[req.body._id].qty += 1;
+            cart.totalQty += 1;
+            cart.totalPrice += req.body.price;
+            res.redirect('/customer/cart')
+        },
+        updatedownqty(req, res) {
+            let cart = req.session.cart;
+            cart.items[req.body._id].qty -= 1;
+            cart.totalQty -= 1;
+            cart.totalPrice -= req.body.price;
+            if(cart.items[req.body._id].qty == 0) {
+                delete cart.items[req.body._id]
+            }
+            if(cart.totalQty == 0) {
+                delete req.session.cart;
+            }
+            res.redirect('/customer/cart')
+        },
+        deleteitem(req, res) {
+            let cart = req.session.cart;
+            if(cart.items[req.body._id]) {
+                cart.totalQty -= cart.items[req.body._id].qty;
+                cart.totalPrice -= cart.items[req.body._id].qty * req.body.price;
+                delete cart.items[req.body._id];
+            }
+            if(cart.totalQty == 0) {
+                delete req.session.cart;
+            }
+            res.redirect('/customer/cart')
         }
     }
 }

@@ -149,7 +149,7 @@ function orderController() {
         },
         category(req, res) {
             Category.find({}).then( result => {
-                
+                console.log(result);
                 res.render('admin/category', {category: result})
             }).catch(err => {
                 throw err;

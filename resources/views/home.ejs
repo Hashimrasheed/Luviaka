@@ -67,7 +67,7 @@
 
 
 <!-- cards -->
-<section id="products">
+<section id="products" class="covers">
   <div class="container-fluid">
         <div class="row">
           <% items.forEach(function(item) { %>
@@ -75,15 +75,14 @@
               <div class="tile">
                   <div class="wrapper">
                     <form action="/product">
-                      <div class="banner-img h-40 flex items-center justify-around">
-                        <a href="/products/<%= item._id %>"><img style="margin: auto; width: 50%;" src="/img/products/<%= item.image %>" alt="Image"></a>
+                      <div class="banner-img flex items-center justify-around">
+                        <a href="/products/<%= item._id %>"><img style="margin: auto; width: 15rem; height: 15rem;" src="/img/products/<%= item.image %>" alt="Image"></a>
                         
                         
                       </div>
                     </form>
                     
                       <div class="header" ><%= item.name %></div>
-                      
                       <div class="footer flex items-center justify-around mt-6">
                         <span class="font-bold text-lg">₹<%= item.price %></span>
                           <button data-item="<%= JSON.stringify(item) %>" class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
@@ -91,9 +90,8 @@
                             <span class="ml-4">Add</span>
                         </button>
                       </div>
-
                   </div>
-              </div> 
+              </div>
             </div>
             <!-- popup window -->
             
@@ -102,185 +100,90 @@
         </div>
     </div>
 </section>
-<!-- category selector -->
 
+<!-- category -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div id="wrapper">
 
-<div class="container my-4">
-
-  
-  <hr class="my-4">
-
-  <!--Carousel Wrapper-->
-  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-    <!--Controls-->
-    <!-- <div class="controls-top justify-center">
-      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-    </div> -->
-    <!--/.Controls-->
-
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-      <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-      <li data-target="#multi-item-example" data-slide-to="1"></li>
-      <li data-target="#multi-item-example" data-slide-to="2"></li>
-    </ol>
-    <!--/.Indicators-->
-
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-
-      <!--First slide-->
-      <!-- <div class="carousel-item active">
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div> -->
-      <!--/.First slide-->
-
-      <!--Second slide-->
-      <!-- <div class="carousel-item">
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(47).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(48).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div> -->
-      <!--/.Second slide-->
-
-      <!--Third slide-->
-      <!-- <div class="carousel-item">
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(53).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(51).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div> -->
-      <!--/.Third slide-->
-
-    </div>
-    <!--/.Slides-->
-
+<div class="container p-5">
+  <div class="toggles categorySelect">
+    <a href="#showAll" style="text-decoration: none;"><button>Show All</button> </a>
+    <% category.forEach(function(category) { %>
+      <button data-category="<%= JSON.stringify(category) %>" class="categorySelected"><%= category.category %></button>
+    <% }) %>
   </div>
-  <!--/.Carousel Wrapper-->
-
-
 </div>
 
 
+
+
+  <div class="covers" id="showAll">
+
+    <div class="container-fluid">
+      <div class="row">
+        <% items.forEach(function(item) { %>
+          <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+            <div class="tile">
+                <div class="wrapper">
+                  <form action="/product">
+                    <div class="banner-img flex items-center justify-around">
+                      <a href="/products/<%= item._id %>"><img style="margin: auto; width: 12rem; height: 12rem;" src="/img/products/<%= item.image %>" alt="Image"></a>
+                      
+                      
+                    </div>
+                  </form>
+                  
+                    <div class="header hi" ><%= item.name %></div>
+                    
+                    <div class="footer flex items-center justify-around mt-3">
+                      <span class="font-bold text-lg">₹<%= item.price %></span>
+                        <button data-item="<%= JSON.stringify(item) %>" class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                          <span>+</span>
+                          <span class="ml-4">Add</span>
+                      </button>
+                    </div>
+                </div>
+            </div> 
+          </div>
+          <!-- popup window -->
+          
+        <% }) %>
+          
+      </div>
+  </div>
+  <h1><%= session.category %></h1>
+     
+       
+      
+  </div>
+</div>
+
+<script>
+
+//category select
+
+let categorySelect = document.querySelectorAll('.categorySelected')
+
+
+function sortCategory(category) {
+  if(category == items.category) {
+    
+  }
+  // axios.post('/categorySelect',{category : category.category})
+
+}
+
+
+categorySelect.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    let category = JSON.parse(btn.dataset.category)
+    // console.log(category.category);
+    sortCategory(category.category);
+  })
+})
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <%- include('partials/footer.ejs') %>

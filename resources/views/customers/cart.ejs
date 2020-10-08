@@ -26,15 +26,20 @@
                             <h5 class="pt-4"><%= item.qty %> Pcs</h5>
                         </td>
                         <td>
+                            <ul style="list-style-type: none;" class="mt-3">
+                              <li><button class="arrow upqty "  data-upqty="<%= JSON.stringify(item) %>"><i class="fa fa-plus" aria-hidden="true"></i></button></li>
+                              <li><button class="arrow downqty" data-downqty="<%= JSON.stringify(item) %>"><i class="fa fa-minus" aria-hidden="true"></i></button></li>
+                            </ul>
+                        </td>
+                        <td>
                             <h5 class="font-bold text-lg pt-4">₹<%= item.item.price * item.qty %></h5>
                         </td>
                         <td>
                             <form action="#" method="POST"  class="pt-4">
-                                <button type="submit" onclick="return confirm('Are you sure to delete?')" style="border: none;" >X</button>
+                                <button class="deleteItem" data-dele="<%= JSON.stringify(item) %>" type="submit" onclick="return confirm('Are you sure to remove this item from cart?')" style="border: none;" ><i class="fa fa-times" aria-hidden="true"></i></button>
                               </form>
                         </td>
                       </tr>
-
                     </tbody>
                     <% } %>
                   </table>
@@ -86,7 +91,9 @@
 </section>
 
 
-
+<script>
+    
+</script>
 
 
 <%- include('../partials/footer.ejs') %>
